@@ -1,3 +1,7 @@
+#Build files
+*.g.dat
+*.freezed.dart
+
 # Miscellaneous
 *.class
 *.log
