@@ -1,4 +1,4 @@
-# pokedex_asyn_redux
+# pokedex_async_redux
 
 A new Flutter project.
 
