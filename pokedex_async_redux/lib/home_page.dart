@@ -7,14 +7,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //TODO: title should be placed in constant later
+        //TODO: 'Home Page' should be placed in constant later
         title: const Text("Home Page"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            //TODO: Text should be placed in constant later
+            //TODO: 'This is the Home Page' should be placed in constant later
             Text('This is the Home Page'),
           ],
         ),
