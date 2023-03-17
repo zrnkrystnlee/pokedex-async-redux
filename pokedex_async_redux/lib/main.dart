@@ -14,6 +14,7 @@ void main() {
     StoreProvider(
       store: store,
       child: const MaterialApp(
+        //TODO: title should be placed in constant later
         title: 'Home Page',
         home: HomePage(),
       ),
