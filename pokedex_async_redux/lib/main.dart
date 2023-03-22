@@ -13,8 +13,8 @@ Future<void> main() async {
   );
 
   //TODO: Remove this; for debugging purposes only
-  final pokemons = await ApiService().pokemonApi.getPokemonList(offset: '0', limit: '151');
-  pokemons;
+  final pokemonDetails = await ApiService().pokemonApi.getPokemonDetails(name: 'snorlax');
+  pokemonDetails;
 
   runApp(
     StoreProvider(
