@@ -1,6 +1,7 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/state/action/pokemon_actions.dart';
+import 'package:pokedex_asyn_redux/utils/constants.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     //TODO: StoreProviders should be removed later
     StoreProvider.dispatch(context, GetPokemonsAction());
-    StoreProvider.dispatch(context, GetPokemonDetailsAction());
+    StoreProvider.dispatch(context, GetPokemonDetailsAction(pokemonName: selectedPokemon));
 
     return Scaffold(
       appBar: AppBar(
