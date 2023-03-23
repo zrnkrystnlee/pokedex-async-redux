@@ -7,7 +7,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: StoreProviders should be removed later
     StoreProvider.dispatch(context, GetPokemonsAction());
+    StoreProvider.dispatch(context, GetPokemonDetailsAction());
 
     return Scaffold(
       appBar: AppBar(
