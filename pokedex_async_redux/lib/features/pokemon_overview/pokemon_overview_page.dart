@@ -15,18 +15,16 @@ class PokemonOverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(pokemonOverviewTitle),
-      ),
+        title: const Text(pokemonOverviewTitle)),
       body: GridView.builder(
         itemCount: pokemons.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: defaultTwo,
           childAspectRatio: defaultOne,
         ),
-        itemBuilder: (context, index) {
+        itemBuilder: (_, index) {
           final pokemon = pokemons[index];
-          final String imageURL = imageUrlPrefix.replaceAll(RegExp(r'\[index\]'), '${index + 1}') + imageUrlSuffix;
-          return PokemonCard(pokemon: pokemon.name, imageURL: imageURL);
+          return PokemonCard(pokemon: pokemon);
         },
       ),
     );

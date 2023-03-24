@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_asyn_redux/api/model/pokemon.dart';
 import 'package:pokedex_asyn_redux/utils/constants.dart';
 import 'package:pokedex_asyn_redux/utils/string_extensions.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({
-    required this.pokemon,
-    required this.imageURL,
     Key? key,
+    required this.pokemon,
   }) : super(key: key);
 
-  final String imageURL;
-  final String pokemon;
+  final Pokemon pokemon;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(cardDefaultSize),
+      margin: const EdgeInsets.all(commonSpaceSize),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(cardBorderRadius),
-      ),
-      elevation: cardDefaultSize,
+        borderRadius: BorderRadius.circular(cardBorderRadius)),
+      elevation: commonSpaceSize,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -27,7 +25,7 @@ class PokemonCard extends StatelessWidget {
             height: pokemonNameContainerHeight,
             padding: const EdgeInsets.symmetric(vertical: textPaddingVertical),
             child: Text(
-              pokemon.capitalizeName(),
+              pokemon.name.capitalizeName(),
               style: const TextStyle(
                 fontSize: pokemonNameFontSize,
                 fontWeight: textFontWeight,
@@ -76,12 +74,12 @@ class PokemonCard extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(cardDefaultSize),
+              padding: const EdgeInsets.all(commonSpaceSize),
               child: SizedBox(
                 width: pokemonImageSize,
                 height: pokemonImageSize,
                 child: Image.network(
-                  imageURL,
+                  pokemon.url.toCustomUrl,
                   fit: BoxFit.contain,
                 ),
               ),

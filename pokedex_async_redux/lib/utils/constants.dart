@@ -4,8 +4,8 @@ const offsetPokemon = '0';
 const limitPokemon = '151';
 
 ///Pokemon Overview Page String Constants
-const imageUrlPrefix = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/[index]';
-const imageUrlSuffix = '.png';
+const imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/[index].png';
+const indexKey = '[index]';
 const String pokemonOverviewTitle = 'Pokedex';
 const String type = 'Type';
 const String typePrimary = 'Type 1';
@@ -14,7 +14,7 @@ const FontWeight textFontWeight = FontWeight.bold;
 ///Pokemon Overview Page Number Constants
 const double defaultOne = 1.0;
 const int defaultTwo = 2;
-const double cardDefaultSize = 5.0;
+const double commonSpaceSize = 5.0;
 const double cardBorderRadius = 15.0;
 const double pokemonNameContainerHeight = 40.0;
 const double textPaddingVertical = 10.0;
