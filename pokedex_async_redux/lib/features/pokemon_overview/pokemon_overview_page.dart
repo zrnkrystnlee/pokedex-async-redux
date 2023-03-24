@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:pokedex_asyn_redux/api/model/pokemon.dart';
+import 'package:pokedex_asyn_redux/features/pokemon_overview/widgets/pokemon_card.dart';
+import 'package:pokedex_asyn_redux/utils/constants.dart';
+
+class PokemonOverviewPage extends StatelessWidget {
+  const PokemonOverviewPage({
+    required this.pokemons,
+    Key? key,
+  }) : super(key: key);
+
+  final List<Pokemon> pokemons;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(pokemonOverviewTitle),
+      ),
+      body: GridView.builder(
+        itemCount: pokemons.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: defaultTwo,
+          childAspectRatio: defaultOne,
+        ),
+        itemBuilder: (context, index) {
+          final pokemon = pokemons[index];
+          final String imageURL = '$imageUrlPrefix${index + 1}$imageUrlSuffix';
+          return PokemonCard(pokemon: pokemon.name, imageURL: imageURL);
+        },
+      ),
+    );
+  }
+}

@@ -8,7 +8,7 @@ part 'stats.g.dart';
 @freezed
 class Stats with _$Stats {
   factory Stats({
-    @Default(0) @JsonKey(name: 'base_stat') required int baseStat,
+    @JsonKey(name: 'base_stat') required int baseStat,
     @JsonKey(name: 'stat') required Stat stats,
   }) = _PokemonStats;
 
