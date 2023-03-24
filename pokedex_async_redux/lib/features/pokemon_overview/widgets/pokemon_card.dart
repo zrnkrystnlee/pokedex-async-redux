@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/api/model/pokemon.dart';
 import 'package:pokedex_asyn_redux/utils/constants.dart';
@@ -13,22 +14,24 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pokemonName = pokemon.name.capitalize();
     return Card(
       margin: const EdgeInsets.all(commonSpaceSize),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(cardBorderRadius)),
+        borderRadius: BorderRadius.circular(cardBorderRadius),
+      ),
       elevation: commonSpaceSize,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            height: pokemonNameContainerHeight,
-            padding: const EdgeInsets.symmetric(vertical: textPaddingVertical),
+            height: 40.0,
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
-              pokemon.name.capitalizeName(),
+              pokemonName,
               style: const TextStyle(
-                fontSize: pokemonNameFontSize,
-                fontWeight: textFontWeight,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
@@ -36,9 +39,9 @@ class PokemonCard extends StatelessWidget {
           //TODO: Will add necessary codes for getting Primary Type of the Pokemon later
           Container(
             height: typeContainerHeight,
-            padding: const EdgeInsets.symmetric(horizontal: typePaddingHorizontal),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(typeContainerBorderRadius),
+              borderRadius: BorderRadius.circular(15.0),
               color: typeColorContainer,
             ),
             child: Row(
@@ -47,8 +50,8 @@ class PokemonCard extends StatelessWidget {
                 const Text(
                   type,
                   style: TextStyle(
-                    fontSize: typeTextFontSize,
-                    fontWeight: textFontWeight,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                     color: lightColor,
                   ),
                 ),
@@ -56,14 +59,14 @@ class PokemonCard extends StatelessWidget {
                   height: typePrimaryBoxHeight,
                   width: typePrimaryBoxWidth,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(typeBoxBorderRadius),
+                    borderRadius: BorderRadius.circular(10.0),
                     color: lightColor,
                   ),
                   alignment: Alignment.center,
                   child: const Text(
                     typePrimary,
                     style: TextStyle(
-                      fontSize: typePrimaryTextFontSize,
+                      fontSize: 12.0,
                       fontWeight: FontWeight.bold,
                       color: darkColor,
                     ),
