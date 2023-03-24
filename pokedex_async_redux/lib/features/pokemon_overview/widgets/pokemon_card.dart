@@ -1,6 +1,7 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/api/model/pokemon.dart';
+import 'package:pokedex_asyn_redux/utils/color_constants.dart';
 import 'package:pokedex_asyn_redux/utils/constants.dart';
 import 'package:pokedex_asyn_redux/utils/string_extensions.dart';
 
@@ -18,7 +19,7 @@ class PokemonCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.all(commonSpaceSize),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(cardBorderRadius),
+        borderRadius: BorderRadius.circular(15.0),
       ),
       elevation: commonSpaceSize,
       child: Column(
