@@ -25,7 +25,7 @@ class PokemonOverviewPage extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final pokemon = pokemons[index];
-          final String imageURL = '$imageUrlPrefix${index + 1}$imageUrlSuffix';
+          final String imageURL = imageUrlPrefix.replaceAll(RegExp(r'\[index\]'), '${index + 1}') + imageUrlSuffix;
           return PokemonCard(pokemon: pokemon.name, imageURL: imageURL);
         },
       ),

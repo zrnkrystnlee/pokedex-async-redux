@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/utils/constants.dart';
+import 'package:pokedex_asyn_redux/utils/string_extensions.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({
@@ -26,7 +27,7 @@ class PokemonCard extends StatelessWidget {
             height: pokemonNameContainerHeight,
             padding: const EdgeInsets.symmetric(vertical: textPaddingVertical),
             child: Text(
-              pokemon.toUpperCase(),
+              pokemon.capitalizeName(),
               style: const TextStyle(
                 fontSize: pokemonNameFontSize,
                 fontWeight: textFontWeight,

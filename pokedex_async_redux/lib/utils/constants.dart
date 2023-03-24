@@ -4,8 +4,8 @@ const offsetPokemon = '0';
 const limitPokemon = '151';
 
 ///Pokemon Overview Page String Constants
-const String imageUrlPrefix = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/';
-const String imageUrlSuffix = '.png';
+const imageUrlPrefix = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/[index]';
+const imageUrlSuffix = '.png';
 const String pokemonOverviewTitle = 'Pokedex';
 const String type = 'Type';
 const String typePrimary = 'Type 1';
