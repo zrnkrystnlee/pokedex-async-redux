@@ -5,4 +5,3 @@ const Color lightColor = Colors.white;
 const Color darkColor = Colors.black;
 const Color typeColorContainer = Colors.blueGrey;
 const Color loadingScreen = Color.fromRGBO(254, 159, 78, 1);
-const Color errorScreen = Color.fromRGBO(242, 244, 244, 1);

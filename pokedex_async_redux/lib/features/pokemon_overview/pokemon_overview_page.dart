@@ -4,6 +4,7 @@ import 'package:pokedex_asyn_redux/features/pokemon_overview/widgets/pokemon_car
 import 'package:pokedex_asyn_redux/utils/async.dart';
 import 'package:pokedex_asyn_redux/utils/color_constants.dart';
 import 'package:pokedex_asyn_redux/utils/constants.dart';
+import 'package:pokedex_asyn_redux/widgets/spacing.dart';
 
 class PokemonOverviewPage extends StatelessWidget {
   PokemonOverviewPage({
@@ -40,31 +41,34 @@ class PokemonOverviewPage extends StatelessWidget {
             ),
           ),
         ),
-        error: (errorMessage) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(errorMessage!),
-                duration: const Duration(days: 1),
+          error: (errorMessage) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _showErrorMessageSnackbar(context, errorMessage!);
+            });
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(noPokemonsAvailableLabel),
+                  const VerticalSpace(height: 20),
+                  Image.asset(
+                    pokedexErrorImage,
+                    height: 120,
+                    width: 120,
+                  ),
+                ],
               ),
             );
-          });
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(noPokemonsAvailableLabel),
-                const SizedBox(height: 20),
-                Image.asset(
-                  pokedexErrorImage,
-                  height: 120,
-                  width: 120,
-                ),
-              ],
-            ),
-          );
-        },
+          },
       ),
     );
   }
+}
+
+void _showErrorMessageSnackbar(BuildContext context, String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+        content: Text(errorMessage ?? ''),
+    ),
+  );
 }

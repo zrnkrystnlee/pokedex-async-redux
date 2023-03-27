@@ -8,7 +8,7 @@ import 'package:pokedex_asyn_redux/utils/constants.dart';
 
 class PokemonOverviewVmFactory extends VmFactory<AppState, PokemonOverviewConnector> {
   @override
-  Vm? fromStore() => PokemonOverviewVm(pokemons: _pokemons());
+  Vm fromStore() => PokemonOverviewVm(pokemons: _pokemons());
 
   Async<List<Pokemon>> _pokemons() {
     if (state.wait.isWaitingFor(GetPokemonsAction.key)) return const Async.loading();

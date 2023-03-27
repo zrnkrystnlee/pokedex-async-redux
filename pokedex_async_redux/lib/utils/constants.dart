@@ -11,9 +11,8 @@ const String typePrimary = 'Type 1';
 ///Pokemon Loading and Error Message
 const String pikachuRunningImage = 'assets/images/pikachu-running.gif';
 const String pokedexErrorImage = 'assets/images/pokedex-glitch.gif';
-const String errorMessage = 'Uh oh! Pokedex not working; Return to Professor Oak';
+const String errorMessage = 'Something Went Wrong!';
 const String noPokemonsAvailableLabel = 'No Pokemons Available!';
-const String closeButton = 'Close';
 
 ///Pokemon Card Page Number Constants
 const double commonSpaceSize = 5.0;
