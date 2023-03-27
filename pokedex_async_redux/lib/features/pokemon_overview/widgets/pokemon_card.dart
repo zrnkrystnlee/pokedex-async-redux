@@ -57,8 +57,8 @@ class PokemonCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  height: typePrimaryBoxHeight,
-                  width: typePrimaryBoxWidth,
+                  height: 20.0,
+                  width: 80.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     color: lightColor,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/api/model/pokemon.dart';
 import 'package:pokedex_asyn_redux/features/pokemon_overview/widgets/pokemon_card.dart';
+import 'package:pokedex_asyn_redux/utils/async.dart';
+import 'package:pokedex_asyn_redux/utils/color_constants.dart';
 import 'package:pokedex_asyn_redux/utils/constants.dart';
 
 class PokemonOverviewPage extends StatelessWidget {
@@ -9,7 +11,7 @@ class PokemonOverviewPage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final List<Pokemon> pokemons;
+  final Async<List<Pokemon>> pokemons;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +19,28 @@ class PokemonOverviewPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(pokemonOverviewTitle),
       ),
-      body: GridView.builder(
-        itemCount: pokemons.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (_, index) {
-          final pokemon = pokemons[index];
-          return PokemonCard(pokemon: pokemon);
-        },
+      body: pokemons.when(
+        (data) => GridView.builder(
+          itemCount: data.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (_, index) {
+            final pokemon = data[index];
+            return PokemonCard(pokemon: pokemon);
+          },
+        ),
+        loading: () => Container(
+          color: loadingScreen,
+          child: Center(
+            child: Image.asset(
+              pikachuRunningImage,
+              height: 210,
+              width: 210,
+            ),
+          ),
+        ),
+        error: (errorMessage) => AlertDialog(
+          title: Text(errorMessage!),
+        ),
       ),
     );
   }

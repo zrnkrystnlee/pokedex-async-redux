@@ -8,10 +8,12 @@ const String pokemonOverviewTitle = 'Pokedex';
 const String type = 'Type';
 const String typePrimary = 'Type 1';
 
-///Pokemon Overview Page Number Constants
+///Pokemon Loading and Error Message
+const String pikachuRunningImage = 'assets/images/pikachu-running.gif';
+const String errorMessage = 'Uh oh! Pokedex not working; Return to Professor Oak';
+
+///Pokemon Card Page Number Constants
 const double commonSpaceSize = 5.0;
 const double typeContainerHeight = 30.0;
 const double typePaddingHorizontal = 12.0;
-const double typePrimaryBoxHeight = 20.0;
-const double typePrimaryBoxWidth = 80.0;
 const double pokemonImageSize = 150.0;
