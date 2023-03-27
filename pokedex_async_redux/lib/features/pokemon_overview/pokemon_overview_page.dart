@@ -6,12 +6,13 @@ import 'package:pokedex_asyn_redux/utils/color_constants.dart';
 import 'package:pokedex_asyn_redux/utils/constants.dart';
 
 class PokemonOverviewPage extends StatelessWidget {
-  const PokemonOverviewPage({
+  PokemonOverviewPage({
     required this.pokemons,
     Key? key,
   }) : super(key: key);
 
   final Async<List<Pokemon>> pokemons;
+  final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +21,16 @@ class PokemonOverviewPage extends StatelessWidget {
         title: const Text(pokemonOverviewTitle),
       ),
       body: pokemons.when(
-        (data) => GridView.builder(
-          itemCount: data.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemBuilder: (_, index) {
-            final pokemon = data[index];
-            return PokemonCard(pokemon: pokemon);
-          },
-        ),
+        (data) {
+          return GridView.builder(
+            itemCount: data.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemBuilder: (_, index) {
+              final pokemon = data[index];
+              return PokemonCard(pokemon: pokemon);
+            },
+          );
+        },
         loading: () => Container(
           color: loadingScreen,
           child: Center(
@@ -38,10 +41,34 @@ class PokemonOverviewPage extends StatelessWidget {
             ),
           ),
         ),
-        error: (errorMessage) => AlertDialog(
-          title: Text(errorMessage!),
-        ),
+        error: (errorMessage) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _showErrorMessageSnackbar(context, errorMessage!);
+          });
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(noPokemonsAvailableLabel),
+                const SizedBox(height: 20),
+                Image.asset(
+                  pokedexErrorImage,
+                  height: 120,
+                  width: 120,
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
+  }
+
+  void _showErrorMessageSnackbar(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(message),
+      duration: const Duration(days: 1),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
