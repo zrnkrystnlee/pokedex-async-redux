@@ -21,7 +21,7 @@ class PokemonOverviewPage extends StatelessWidget {
         title: const Text(pokemonOverviewTitle),
       ),
       body: pokemons.when(
-        (data) {
+            (data) {
           return GridView.builder(
             itemCount: data.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
@@ -31,44 +31,43 @@ class PokemonOverviewPage extends StatelessWidget {
             },
           );
         },
-        loading: () => Container(
-          color: loadingScreen,
-          child: Center(
-            child: Image.asset(
-              pikachuRunningImage,
-              height: 210,
-              width: 210,
-            ),
-          ),
-        ),
-          error: (errorMessage) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              _showErrorMessageSnackbar(context, errorMessage!);
-            });
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(noPokemonsAvailableLabel),
-                  const VerticalSpace(height: 20),
-                  Image.asset(
-                    pokedexErrorImage,
-                    height: 120,
-                    width: 120,
-                  ),
-                ],
+        loading: () =>
+            Container(
+              color: loadingScreen,
+              child: Center(
+                child: Image.asset(
+                  pikachuRunningImage,
+                  height: 210,
+                  width: 210,
+                ),
               ),
-            );
-          },
+            ),
+        error: (errorMessage) {
+          WidgetsBinding.instance.addPostFrameCallback(
+                (_) => _showErrorMessageSnackbar(context, errorMessage),
+          );
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(noPokemonsAvailableLabel),
+                const VerticalSpace(height: 20),
+                Image.asset(
+                  pokedexErrorImage,
+                  height: 120,
+                  width: 120,
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
-}
 
-void _showErrorMessageSnackbar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(
-        content: Text(errorMessage ?? ''),
-    ),
-  );
+  void _showErrorMessageSnackbar(BuildContext context, String? errorMessage) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(errorMessage ?? emptyString)),
+    );
+  }
 }

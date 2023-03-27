@@ -13,6 +13,7 @@ const String pikachuRunningImage = 'assets/images/pikachu-running.gif';
 const String pokedexErrorImage = 'assets/images/pokedex-glitch.gif';
 const String errorMessage = 'Something Went Wrong!';
 const String noPokemonsAvailableLabel = 'No Pokemons Available!';
+const String emptyString = '';
 
 ///Pokemon Card Page Number Constants
 const double commonSpaceSize = 5.0;
