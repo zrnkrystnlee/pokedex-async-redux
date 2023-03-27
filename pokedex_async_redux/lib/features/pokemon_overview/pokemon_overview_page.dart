@@ -12,7 +12,6 @@ class PokemonOverviewPage extends StatelessWidget {
   }) : super(key: key);
 
   final Async<List<Pokemon>> pokemons;
-  final GlobalKey<ScaffoldMessengerState> snackBarKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,12 @@ class PokemonOverviewPage extends StatelessWidget {
         ),
         error: (errorMessage) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            _showErrorMessageSnackbar(context, errorMessage!);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(errorMessage!),
+                duration: const Duration(days: 1),
+              ),
+            );
           });
           return Center(
             child: Column(
@@ -62,13 +66,5 @@ class PokemonOverviewPage extends StatelessWidget {
         },
       ),
     );
-  }
-
-  void _showErrorMessageSnackbar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      content: Text(message),
-      duration: const Duration(days: 1),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
