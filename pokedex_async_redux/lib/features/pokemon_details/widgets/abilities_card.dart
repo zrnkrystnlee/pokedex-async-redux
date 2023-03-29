@@ -1,14 +1,14 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/api/model/abilities.dart';
-import 'package:pokedex_asyn_redux/utils/color_constants.dart';
+import 'package:pokedex_asyn_redux/utils/colors.dart';
 import 'package:pokedex_asyn_redux/utils/number_constants.dart';
 import 'package:pokedex_asyn_redux/utils/string_constants.dart';
 
 class AbilitiesContainer extends StatelessWidget {
   const AbilitiesContainer({
-    Key? key,
     required this.ability,
+    Key? key,
   }) : super(key: key);
 
   final List<Abilities> ability;

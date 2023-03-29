@@ -7,12 +7,16 @@ import 'package:pokedex_asyn_redux/features/pokemon_details/widgets/general_deta
 import 'package:pokedex_asyn_redux/features/pokemon_details/widgets/moves_card.dart';
 import 'package:pokedex_asyn_redux/features/pokemon_details/widgets/stats_card.dart';
 import 'package:pokedex_asyn_redux/utils/async.dart';
-import 'package:pokedex_asyn_redux/utils/color_constants.dart';
+import 'package:pokedex_asyn_redux/utils/colors.dart';
 import 'package:pokedex_asyn_redux/utils/string_constants.dart';
 import 'package:pokedex_asyn_redux/utils/string_extensions.dart';
 
 class PokemonDetailsPage extends StatelessWidget {
-  const PokemonDetailsPage({Key? key, required this.pokemonDetails, required this.pokemon}) : super(key: key);
+  const PokemonDetailsPage({
+    required this.pokemonDetails,
+    required this.pokemon,
+    Key? key,
+  }) : super(key: key);
 
   final Pokemon pokemon;
   final Async<PokemonDetails> pokemonDetails;
@@ -22,7 +26,7 @@ class PokemonDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgDetailsPage,
       body: pokemonDetails.when(
-        (data) => Stack(
+        (pokemonDetails) => Stack(
           children: [
             Positioned(
               top: 90.0,
@@ -67,10 +71,10 @@ class PokemonDetailsPage extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      GeneralDetailsContainer(pokemonDetails: data),
-                      AbilitiesContainer(ability: data.abilities),
-                      StatsContainer(stat: data.stats),
-                      MovesContainer(move: data.moves),
+                      GeneralDetailsContainer(pokemonDetails: pokemonDetails),
+                      AbilitiesContainer(ability: pokemonDetails.abilities),
+                      StatsContainer(stat: pokemonDetails.stats),
+                      MovesContainer(move: pokemonDetails.moves),
                     ],
                   ),
                 ),
@@ -89,16 +93,9 @@ class PokemonDetailsPage extends StatelessWidget {
           ),
         ),
         error: (errorMessage) {
-          WidgetsBinding.instance.addPostFrameCallback(
-            (_) => _showErrorMessageSnackbar(context, errorMessage),
-          );
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(noDetailsAvailableLabel),
-              ],
-            ),
+          WidgetsBinding.instance.addPostFrameCallback((_) => _showErrorMessageSnackbar(context, errorMessage));
+          return const Center(
+            child: Text(noDetailsAvailableLabel),
           );
         },
       ),

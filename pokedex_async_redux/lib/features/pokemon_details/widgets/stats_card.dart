@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/api/model/stats.dart';
-import 'package:pokedex_asyn_redux/utils/color_constants.dart';
+import 'package:pokedex_asyn_redux/utils/colors.dart';
 import 'package:pokedex_asyn_redux/utils/string_constants.dart';
 import 'package:pokedex_asyn_redux/widgets/spacing.dart';
 
 class StatsContainer extends StatelessWidget {
   const StatsContainer({
-    Key? key,
     required this.stat,
+    Key? key,
   }) : super(key: key);
 
   final List<Stats> stat;
@@ -33,43 +33,16 @@ class StatsContainer extends StatelessWidget {
 }
 
 class _StatItem extends StatelessWidget {
-  const _StatItem({Key? key, required this.stats}) : super(key: key);
+  const _StatItem({
+    required this.stats,
+    Key? key,
+  }) : super(key: key);
 
   final Stats stats;
 
   @override
   Widget build(BuildContext context) {
-    String imageName;
-    String title;
-    switch (stats.stat.name) {
-      case 'hp':
-        imageName = heartImage;
-        title = hpLabel;
-        break;
-      case 'attack':
-        imageName = swordImage;
-        title = attackLabel;
-        break;
-      case 'defense':
-        imageName = shieldImage;
-        title = defenseLabel;
-        break;
-      case 'special-attack':
-        imageName = spAttackImage;
-        title = spAttackLabel;
-        break;
-      case 'special-defense':
-        imageName = spShieldImage;
-        title = spDefenseLabel;
-        break;
-      case 'speed':
-        imageName = speedImage;
-        title = speedLabel;
-        break;
-      default:
-        imageName = pokeballImage;
-        title = unknownLabel;
-    }
+    final statInfo = _getStatInfo(stats.stat.name);
 
     return Column(
       children: [
@@ -80,7 +53,7 @@ class _StatItem extends StatelessWidget {
               width: 15.0,
               height: 15.0,
               child: Image.asset(
-                imageName,
+                statInfo[imageName]!,
                 fit: BoxFit.contain,
               ),
             ),
@@ -90,7 +63,7 @@ class _StatItem extends StatelessWidget {
               height: 15.0,
               child: Center(
                 child: Text(
-                  title,
+                  statInfo[title]!,
                   style: const TextStyle(
                     fontSize: 12.0,
                   ),
@@ -116,5 +89,24 @@ class _StatItem extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+Map<String, String> _getStatInfo(String statName) {
+  switch (statName) {
+    case hpCase:
+      return {imageName: heartImage, title: hpLabel};
+    case attackCase:
+      return {imageName: swordImage, title: attackLabel};
+    case defenseCase:
+      return {imageName: shieldImage, title: defenseLabel};
+    case spAttackCase:
+      return {imageName: spAttackImage, title: spAttackLabel};
+    case spDefCase:
+      return {imageName: spShieldImage, title: spDefenseLabel};
+    case speedCase:
+      return {imageName: speedImage, title: speedLabel};
+    default:
+      return {imageName: pokeballImage, title: unknownLabel};
   }
 }

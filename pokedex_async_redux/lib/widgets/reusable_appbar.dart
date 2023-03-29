@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_asyn_redux/utils/color_constants.dart';
+import 'package:pokedex_asyn_redux/utils/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  const CustomAppBar({
+    required this.title,
+    Key? key,
+  }) : super(key: key);
 
-  const CustomAppBar({required this.title, Key? key}) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {

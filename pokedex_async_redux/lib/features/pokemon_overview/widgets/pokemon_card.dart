@@ -1,40 +1,29 @@
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/api/model/pokemon.dart';
-import 'package:pokedex_asyn_redux/features/pokemon_details/pokemon_details_connector.dart';
-import 'package:pokedex_asyn_redux/utils/color_constants.dart';
+import 'package:pokedex_asyn_redux/utils/colors.dart';
 import 'package:pokedex_asyn_redux/utils/number_constants.dart';
 import 'package:pokedex_asyn_redux/utils/string_constants.dart';
 import 'package:pokedex_asyn_redux/utils/string_extensions.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({
-    Key? key,
     required this.pokemon,
+    required this.onTap,
+    Key? key,
   }) : super(key: key);
 
   final Pokemon pokemon;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     final pokemonName = pokemon.name.capitalize();
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => PokemonDetailsConnector(
-              pokemonName: pokemon.name,
-              pokemonImageUrl: imageUrl,
-              pokemon: pokemon,
-            ),
-          ),
-        );
-      },
+      onTap: onTap,
       child: Card(
         margin: const EdgeInsets.all(commonSpaceSize),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
         elevation: commonSpaceSize,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
