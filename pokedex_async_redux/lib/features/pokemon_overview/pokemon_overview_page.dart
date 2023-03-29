@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/api/model/pokemon.dart';
 import 'package:pokedex_asyn_redux/features/pokemon_overview/widgets/pokemon_card.dart';
-import 'package:pokedex_asyn_redux/features/pokemon_overview/widgets/pokemon_search_bar.dart';
 import 'package:pokedex_asyn_redux/utils/async.dart';
 import 'package:pokedex_asyn_redux/utils/color_constants.dart';
 import 'package:pokedex_asyn_redux/utils/string_constants.dart';
 import 'package:pokedex_asyn_redux/widgets/reusable_appbar.dart';
 import 'package:pokedex_asyn_redux/widgets/spacing.dart';
 
-class PokemonOverviewPage extends StatefulWidget {
-  const PokemonOverviewPage({
+class PokemonOverviewPage extends StatelessWidget {
+  PokemonOverviewPage({
     required this.pokemons,
     Key? key,
   }) : super(key: key);
@@ -17,69 +16,49 @@ class PokemonOverviewPage extends StatefulWidget {
   final Async<List<Pokemon>> pokemons;
 
   @override
-  PokemonOverviewPageState createState() => PokemonOverviewPageState();
-}
-
-class PokemonOverviewPageState extends State<PokemonOverviewPage> {
-  String _searchQuery = emptyString;
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(title: pokemonOverviewTitle),
-      body: Column(
-        children: [
-          PokemonSearchBar(onSearch: (query) {
-            setState(() {
-              _searchQuery = query;
-            });
-          }),
-          Expanded(
-            child: widget.pokemons.when(
-              (data) {
-                final filteredPokemons =
-                    data.where((pokemon) => pokemon.name.toLowerCase().contains(_searchQuery.toLowerCase()));
-                return GridView.builder(
-                  itemCount: filteredPokemons.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemBuilder: (_, index) {
-                    final pokemon = filteredPokemons.elementAt(index);
-                    return PokemonCard(pokemon: pokemon);
-                  },
-                );
-              },
-              loading: () => Container(
-                color: mainBgColor,
-                child: Center(
-                  child: Image.asset(
-                    pikachuRunningImage,
-                    height: 210,
-                    width: 210,
-                  ),
-                ),
-              ),
-              error: (errorMessage) {
-                WidgetsBinding.instance.addPostFrameCallback(
-                  (_) => _showErrorMessageSnackbar(context, errorMessage),
-                );
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(noPokemonsAvailableLabel),
-                      const VerticalSpace(height: 20),
-                      Image.asset(
-                        pokedexErrorImage,
-                        height: 120,
-                        width: 120,
-                      ),
-                    ],
-                  ),
-                );
-              },
+      body: pokemons.when(
+            (data) {
+          return GridView.builder(
+            itemCount: data.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemBuilder: (_, index) {
+              final pokemon = data[index];
+              return PokemonCard(pokemon: pokemon);
+            },
+          );
+        },
+        loading: () => Container(
+          color: mainBgColor,
+          child: Center(
+            child: Image.asset(
+              pikachuRunningImage,
+              height: 210,
+              width: 210,
             ),
           ),
-        ],
+        ),
+        error: (errorMessage) {
+          WidgetsBinding.instance.addPostFrameCallback(
+                (_) => _showErrorMessageSnackbar(context, errorMessage),
+          );
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(noPokemonsAvailableLabel),
+                const VerticalSpace(height: 20),
+                Image.asset(
+                  pokedexErrorImage,
+                  height: 120,
+                  width: 120,
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
