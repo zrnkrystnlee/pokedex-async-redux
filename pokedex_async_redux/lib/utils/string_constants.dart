@@ -1,5 +1,6 @@
 const offsetPokemon = '0';
 const limitPokemon = '151';
+const emptyString = '';
 
 ///Pokemon Overview Page String Constants
 const imageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/[index].png';
@@ -9,11 +10,11 @@ const type = 'Type';
 const typePrimary = 'Type 1';
 
 ///Pokemon Loading and Error Message
-const pikachuRunningImage = 'assets/images/pikachu-running.gif';
+const String mewSpinningImage = 'assets/images/mew-spinning.gif';
 const pokedexErrorImage = 'assets/images/pokedex-glitch.gif';
+const String magikarpFloppingImage = 'assets/images/magikarp-flopping.gif';
 const errorMessage = 'Uh Oh! Pokedex not working!; Return to Professor Oak';
 const noPokemonsAvailableLabel = 'No Pokemons Available!';
-const emptyString = '';
 
 ///Pokemon Details Constants
 const heightLabel = 'Height';
@@ -52,3 +53,8 @@ const spAttackImage = 'assets/images/spAttack-image.png';
 const spShieldImage = 'assets/images/spSheild-image.png';
 const speedImage = 'assets/images/speed-image.png';
 const pokeballImage = 'assets/images/pokeball-image.png';
+
+///Search Bar Constants
+const searchPokemonHintText = 'Search for Pokemon';
+const errorSearchMessage = 'No search results found!';
+const backToPokemonOverviewPage = 'Go Back Pokedex Home Page';
