@@ -88,23 +88,6 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
                           height: pokemonImageSize,
                           width: pokemonImageSize,
                         ),
-                        ElevatedButton(
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PokemonOverviewPage(
-                                pokemons: widget.pokemons,
-                                searchedPokemons: widget.searchedPokemons,
-                                clearSearchedPokemons: widget.clearSearchedPokemons,
-                                filterPokemons: widget.filterPokemons,
-                              ),
-                            ),
-                          ),
-                          child: const Text(
-                            backToPokemonOverviewPage,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
                       ],
                     ),
                   );
@@ -182,8 +165,9 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
   }
 
   void _duringPokemonSearch(String queryText) {
+    print('_duringPokemonSearch queryText: $queryText');
     _debounceTimer = Timer(
-      const Duration(milliseconds: 500),
+      const Duration(milliseconds: 1000),
       () => setState(() {
         widget.filterPokemons(queryText);
         isSearching = true;
