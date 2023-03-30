@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_asyn_redux/api/model/pokemon.dart';
+import 'package:pokedex_asyn_redux/features/pokemon_details/pokemon_details_connector.dart';
 import 'package:pokedex_asyn_redux/features/pokemon_overview/widgets/pokemon_card.dart';
 import 'package:pokedex_asyn_redux/utils/async.dart';
-import 'package:pokedex_asyn_redux/utils/color_constants.dart';
-import 'package:pokedex_asyn_redux/utils/constants.dart';
+import 'package:pokedex_asyn_redux/utils/colors.dart';
+import 'package:pokedex_asyn_redux/utils/string_constants.dart';
+import 'package:pokedex_asyn_redux/widgets/reusable_appbar.dart';
 import 'package:pokedex_asyn_redux/widgets/spacing.dart';
 
 class PokemonOverviewPage extends StatelessWidget {
-  PokemonOverviewPage({
+  const PokemonOverviewPage({
     required this.pokemons,
     Key? key,
   }) : super(key: key);
@@ -17,34 +19,34 @@ class PokemonOverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(pokemonOverviewTitle),
-      ),
+      appBar: const CustomAppBar(title: pokemonOverviewTitle),
       body: pokemons.when(
-            (data) {
+        (data) {
           return GridView.builder(
             itemCount: data.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemBuilder: (_, index) {
               final pokemon = data[index];
-              return PokemonCard(pokemon: pokemon);
+              return PokemonCard(
+                pokemon: pokemon,
+                onTap: () => _navigateToPokemonDetailsPage(context: context, pokemon: pokemon),
+              );
             },
           );
         },
-        loading: () =>
-            Container(
-              color: loadingScreen,
-              child: Center(
-                child: Image.asset(
-                  pikachuRunningImage,
-                  height: 210,
-                  width: 210,
-                ),
-              ),
+        loading: () => Container(
+          color: mainBgColor,
+          child: Center(
+            child: Image.asset(
+              pikachuRunningImage,
+              height: 210,
+              width: 210,
             ),
+          ),
+        ),
         error: (errorMessage) {
           WidgetsBinding.instance.addPostFrameCallback(
-                (_) => _showErrorMessageSnackbar(context, errorMessage),
+            (_) => _showErrorMessageSnackbar(context, errorMessage),
           );
           return Center(
             child: Column(
@@ -68,6 +70,16 @@ class PokemonOverviewPage extends StatelessWidget {
   void _showErrorMessageSnackbar(BuildContext context, String? errorMessage) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(errorMessage ?? emptyString)),
+    );
+  }
+
+  void _navigateToPokemonDetailsPage({
+    required BuildContext context,
+    required Pokemon pokemon,
+  }) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => PokemonDetailsConnector(pokemon: pokemon)),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:pokedex_asyn_redux/features/pokemon_overview/pokemon_overview_co
 import 'package:pokedex_asyn_redux/state/action/pokemon_actions.dart';
 import 'package:pokedex_asyn_redux/state/app_state.dart';
 import 'package:pokedex_asyn_redux/utils/async.dart';
-import 'package:pokedex_asyn_redux/utils/constants.dart';
+import 'package:pokedex_asyn_redux/utils/string_constants.dart';
 
 class PokemonOverviewVmFactory extends VmFactory<AppState, PokemonOverviewConnector> {
   @override
